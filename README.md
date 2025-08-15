@@ -10,6 +10,27 @@ It extracts **concepts**, **relationships**, **synonyms**, **semantic types**, a
 ```sh
    pip install gdown
 ```
+2.Go to the graph folder:
+```sh
+cd graph
+```
+
+3.Make the script executable:
+```sh
+chmod +x graph.sh
+```
+
+4.Run the script to download the graph:
+```sh
+./graph.sh
+```
+
+This will download a file called graph.zip into the graph folder.
+
+5.Unzip the file:
+```sh
+unzip graph.zip
+```
 ---
 
 ## ✨ Features
