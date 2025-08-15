@@ -37,6 +37,8 @@ This will download a file called graph.zip into the graph folder.
 ```sh
 unzip graph.zip
 ```
+6️⃣ download Neo4j Desktop (Version 1.6.2) 
+[https://neo4j.com/download/neo4j-desktop/?edition=desktop&flavour=unix&release=2.0.3&offline=false]
 <div align="center">
 ✨ <strong>Quick Overview of the Graph Construction</strong>
 </div>
