@@ -37,7 +37,9 @@ This will download a file called graph.zip into the graph folder.
 ```sh
 unzip graph.zip
 ```
----
+<div align="center">
+✨ <strong>Quick Overview of the Graph Construction</strong>
+</div>
 ---
 ---
 ---
