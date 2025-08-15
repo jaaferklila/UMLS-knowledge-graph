@@ -12,28 +12,28 @@ git clone https://github.com/jaaferklila/UMLS-knowledge-graph.git
 cd UMLS-knowledge-graph
 ```
 # 📥 Download and Import the Graph
-1. Install gdown (to download from Google Drive):
+1️⃣ Install gdown (to download from Google Drive):
 ```sh
    pip install gdown
 ```
-2.Go to the graph folder:
+2️⃣ Go to the graph folder:
 ```sh
 cd graph
 ```
 
-3.Make the script executable:
+3️⃣ Make the script executable:
 ```sh
 chmod +x graph.sh
 ```
 
-4.Run the script to download the graph:
+4️⃣ Run the script to download the graph:
 ```sh
 ./graph.sh
 ```
 
 This will download a file called graph.zip into the graph folder.
 
-5.Unzip the file:
+5️⃣ Unzip the file:
 ```sh
 unzip graph.zip
 ```
