@@ -40,9 +40,7 @@ unzip graph.zip
 <div align="center">
 ✨ <strong>Quick Overview of the Graph Construction</strong>
 </div>
----
----
----
+
 
 ## ✨ Features
 
