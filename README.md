@@ -3,8 +3,14 @@
 
 This repository contains the complete implementation of a **biomedical knowledge graph construction pipeline** leveraging the **Unified Medical Language System (UMLS)**.  
 It extracts **concepts**, **relationships**, **synonyms**, **semantic types**, and **definitions** from UMLS sources, processes the data, and loads it into a **Neo4j graph database**.
-
-
+#  📥 Get Started
+1.1️⃣ Clone the Repository
+```sh
+git clone https://github.com/jaaferklila/UMLS-knowledge-graph.git
+```
+```sh
+cd UMLS-knowledge-graph
+```
 # 📥 Download and Import the Graph
 1. Install gdown (to download from Google Drive):
 ```sh
