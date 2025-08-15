@@ -6,10 +6,10 @@ It extracts **concepts**, **relationships**, **synonyms**, **semantic types**, a
 #  🚀 Get Started
 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/jaaferklila/UMLS-knowledge-graph.git
+git clone https://github.com/jaaferklila/UMLS_knowledge_graph.git
 ```
 ```sh
-cd UMLS-knowledge-graph
+cd UMLS_knowledge_graph
 ```
 # 📥 Download and Import the Graph
 1️⃣ Install gdown (to download from Google Drive):
