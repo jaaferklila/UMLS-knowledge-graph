@@ -39,7 +39,7 @@ unzip graph.zip
 ```
 6️⃣ download Neo4j Desktop (Version 1.6.2) 
 
-https://neo4j.com/deployment-center/?desktop-gdb
+[Neo4j Desktop](https://neo4j.com/deployment-center/?desktop-gdb)
 <div align="center">
 ✨ <strong>Quick Overview of the Graph Construction</strong>
 </div>
