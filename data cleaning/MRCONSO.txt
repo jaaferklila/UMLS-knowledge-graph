@@ -1,0 +1,188 @@
+SELECT COUNT(DISTINCT CUI) AS unique_cui_count
+FROM umls.MRCONSO;
+
+'3454294'
+
+SELECT COUNT(DISTINCT CUI) AS unique_cui_count
+FROM umls.MRCONSO where LAT="ENG" and SAB in("AIR", "CST", "DXP", "LCH", "MCM", "ICPC", "QMR", "AOD", "RAM", "MTHMST",
+    "COSTAR", "UWDA", "SPN", "CCS", "HL7V2.5", "CSP", "AOT", "CHV", "LCH_NW", "ICD9CM",
+    "MTHICD9", "PDQ", "FMA", "SOP", "CDCREC", "USPMG", "HGNC", "GO", "ICD10PCS", "NCBI",
+    "NCI", "MEDLINEPLUS", "HL7V3.0", "CCSR_ICD10PCS", "CCSR_ICD10CM", "HPO", "MSH", "OMIM",
+    "MVX", "CVX", "MTHCMSFRF", "DRUGBANK", "USP", "RXNORM", "VANDF", "MTHSPL", "ATC", "LNC",
+    "HCPCS", "MED-RT", "MTH", "SRC", "JABL", "OMS", "CCC", "UMD", "ORPHANET", "MMSL", "WHO",
+    "BI", "CPM", "ULT", "ICD10", "RCD", "PPAC", "RCDAE", "RCDSA", "RCDSY", "ICD10AE",
+    "CCPSS", "ICD10AM", "ICD10AMAE", "DDB", "PCDS", "ICPC2EENG", "MTHICPC2EAE", "PSY",
+    "MTHICPC2ICD10AE", "ICPC2ICD10ENG", "ICPC2P", "ALT", "DSM-5", "NANDA-I", "CDT", "HCDT",
+    "ICNP", "NEU", "NIC", "NOC", "MDR", "CPT", "MEDCIN", "NUCCHCPT", "PNDS", "MMX",
+    "NDDF", "GS", "HCPT", "ICF", "ICF-CY", "ICD10CM", "SNM", "SNMI", "SNOMEDCT_VET", "SNOMEDCT_US");
+
+
+'3453820'
+
+SELECT COUNT(DISTINCT LAT) AS unique_cui_count FROM umls.MRCONSO;
+29
+
+SELECT COUNT(DISTINCT SAB) AS unique_cui_count FROM umls.MRCONSO;
+190
+
+SELECT COUNT(DISTINCT SAB) AS unique_cui_count FROM umls.MRCONSO where LAT="ENG";
+105
+
+
+mysql> CREATE TABLE umls.MRCONSO_with_names_definitions LIKE umls.MRCONSO;
+mysql> ALTER TABLE umls.MRCONSO_with_names_definitions ADD COLUMN Definitions TEXT;
+
+
+mysql> ALTER TABLE umls.MRCONSO_with_names_definitions
+    -> DROP COLUMN LUI,
+    -> DROP COLUMN SUI,
+    -> DROP COLUMN AUI,
+    -> DROP COLUMN SAUI,
+    -> DROP COLUMN SCUI,
+    -> DROP COLUMN SDUI,
+    -> DROP COLUMN CODE,
+    -> DROP COLUMN SRL,
+    -> DROP COLUMN SUPPRESS,
+    -> DROP COLUMN CVF;
+Query OK, 0 rows affected (0,07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO umls.MRCONSO_with_names_definitions
+    -> SELECT CUI, LAT, TS, STT, ISPREF, SAB, TTY,STR FROM umls.MRCONSO;
+Query OK, 17144356 rows affected (1 hour 9 min 37,62 sec)
+Records: 17144356  Duplicates: 0  Warnings: 0
+
+
+
+
+ALTER TABLE umls.MRCONSO_with_names_definitions
+    -> ADD COLUMN Definitions TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL;
+Query OK, 0 rows affected (0,05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+mysql> SET SESSION group_concat_max_len = 1000000;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> UPDATE umls.MRCONSO_with_names_definitions c
+    -> LEFT JOIN (
+    ->     SELECT
+    ->         CUI,
+    ->         GROUP_CONCAT(CONCAT('Definition from ', SAB, ': ', DEF) SEPARATOR ' || ') AS AllDefinitions
+    ->     FROM umls.MRDEF_CUI_SAB_DEF
+    ->     GROUP BY CUI
+    -> ) d ON c.CUI = d.CUI
+    -> SET c.Definitions = d.AllDefinitions;
+Query OK, 1995398 rows affected (6 min 36,12 sec)
+Rows matched: 10492333  Changed: 1995398  Warnings: 0
+
+mysql> select count(*) from MRCONSO_with_names_definitions;
++----------+
+| count(*) |
++----------+
+| 17144356 |
++----------+
+1 row in set (8,86 sec)
+
+
+
+
+ALTER TABLE umls.MRCONSO_with_names_definitions ADD COLUMN pref_name TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL;
+
+mysql> UPDATE umls.MRCONSO_with_names_definitions
+    -> SET pref_name = STR WHERE 
+    ->    TS = 'P'
+    ->   AND STT = 'PF'
+    ->   AND ISPREF = 'Y'
+    ->   AND SAB in ("ICD10","ICD10AM","RCDSY","RCD","SNMI","MDR","SNM","CCS",
+    -> "MTH","ICPC2P",
+    -> "ICD10AMAE","RCDAE","COSTAR","MSH",
+    -> "NCBI","PCDS","CSP","ICD10AE","ICPC","LCH",
+    -> "AIR",
+    -> "RCDSA","AOD","QMR","MMSL","MTHMST","CPT","UWDA","ULT",
+    -> "JABL",
+    -> "CCPSS","CST","DXP","WHO","UMD","SRC","BI","MCM","RAM","PPAC","CPM","SPN","NDDF","MMX",
+    -> "HL7V3.0","RXNORM","HL7V2.5","AOT","NCI","ICD9CM","MTHICD9","SNOMEDCT_US","NIC",
+    -> "ICPC2ICD10ENG","VANDF","MTHSPL","GO","PDQ","OMIM","GS","OMS","ALT",
+    -> "HCPCS","HCDT","HCPT","MEDCIN","FMA","DDB",
+    -> "ICF","ICF-CY","ICD10PCS",
+    -> "ICD10CM","LNC","CHV","PNDS","HGNC","NEU","SOP","MEDLINEPLUS","CDT","ATC","SNOMEDCT_VET",
+    -> "LCH_NW","MTHCMSFRF","USPMG","HPO","MVX","NANDA-I","DSM-5","DRUGBANK","CVX","CCC","MED-RT","NOC","USP","NUCCHCPT","CCSR_ICD10PCS","CCSR_ICD10CM",
+    -> "CDCREC","ICNP","ORPHANET","ICPC2EENG","MTHICPC2EAE","MTHICPC2ICD10AE","PSY");
+Query OK, 3453820 rows affected (6 min 10,65 sec)
+Rows matched: 3453820  Changed: 3453820  Warnings: 0
+
+mysql> 
+
+  
+  
+  
+  
+  
+  
+mysql> SELECT count(*) 
+    -> FROM umls.MRCONSO_with_names_definitions 
+    -> WHERE name IS NOT NULL;
++----------+
+| count(*) |
++----------+
+|  3453820 |
++----------+
+1 row in set (4,69 sec)
+
+mysql> 
+ DELETE FROM umls.MRCONSO_with_names_definitions WHERE name IS NULL;
+ 
+mysql> SELECT count(*) FROM umls.MRCONSO_with_names_definitions;
++----------+
+| count(*) |
++----------+
+|  3453820 |
++----------+
+1 row in set (13,23 sec)
+
+mysql> CREATE TABLE MRCONSO_with_STR_definitions AS
+    -> SELECT CUI, LAT, TS, STT, ISPREF, SAB, TTY, STR, Definitions
+    -> FROM umls.MRCONSO_with_names_definitions
+    -> WHERE pref_name IS NOT NULL
+    -> ;
+Query OK, 3453820 rows affected (38,75 sec)
+Records: 3453820  Duplicates: 0  Warnings: 0
+
+mysql> SELECT count(*)   FROM umls.MRCONSO_with_STR_definitions;
++----------+
+| count(*) |
++----------+
+|  3453820 |
++----------+
+1 row in set (0,12 sec)
+
+mysql> SELECT count(*)   FROM umls.MRCONSO_with_STR_definitions where definitions is not null;
++----------+
+| count(*) |
++----------+
+|   287972 |
++----------+
+1 row in set (1,06 sec)
+
+mysql> ALTER TABLE umls.MRREL_ENG
+    ->   ADD INDEX idx_CUI1 (CUI1),
+    ->   ADD INDEX idx_AUI1 (AUI1),
+    ->   ADD INDEX idx_STYPE1 (STYPE1),
+    ->   ADD INDEX idx_REL (REL),
+    ->   ADD INDEX idx_CUI2 (CUI2),
+    ->   ADD INDEX idx_AUI2 (AUI2),
+    ->   ADD INDEX idx_STYPE2 (STYPE2),
+    ->   ADD INDEX idx_RELA (RELA),
+    ->   ADD INDEX idx_RUI (RUI),
+    ->   ADD INDEX idx_SRUI (SRUI),
+    ->   ADD INDEX idx_SAB (SAB),
+    ->   ADD INDEX idx_SL (SL),
+    ->   ADD INDEX idx_RG (RG),
+    ->   ADD INDEX idx_DIR (DIR),
+    ->   ADD INDEX idx_SUPPRESS (SUPPRESS),
+    ->   ADD INDEX idx_CVF (CVF);
+Query OK, 0 rows affected (32 min 31,60 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+

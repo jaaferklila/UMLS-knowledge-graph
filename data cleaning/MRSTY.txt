@@ -1,0 +1,33 @@
+mysql> CREATE TABLE umls.CUI_SEMANTIC_TYPES AS
+    -> SELECT
+    ->   CUI,
+    ->   GROUP_CONCAT(STY SEPARATOR ' || ') AS semantic_types
+    -> FROM umls.MRSTY
+    -> GROUP BY CUI;
+Query OK, 3454294 rows affected (16,30 sec)
+Records: 3454294  Duplicates: 0  Warnings: 0
+
+
+mysql> SELECT count(*) FROM umls.CUI_SEMANTIC_TYPES;
++----------+
+| count(*) |
++----------+
+|  3454294 |
++----------+
+1 row in set (0,07 sec)
+
+mysql> SELECT * FROM umls.CUI_SEMANTIC_TYPES LIMIT 5;
++----------+-----------------------------------------------------------------------------------------------------+
+| CUI      | semantic_types                                                                                      |
++----------+-----------------------------------------------------------------------------------------------------+
+| C0000005 | Amino Acid, Peptide, or Protein || Pharmacologic Substance || Indicator, Reagent, or Diagnostic Aid |
+| C0000039 | Organic Chemical || Pharmacologic Substance                                                         |
+| C0000052 | Amino Acid, Peptide, or Protein || Enzyme                                                           |
+| C0000074 | Organic Chemical                                                                                    |
+| C0000084 | Amino Acid, Peptide, or Protein || Biologically Active Substance                                    |
++----------+-----------------------------------------------------------------------------------------------------+
+5 rows in set (0,00 sec)
+
+
+
+

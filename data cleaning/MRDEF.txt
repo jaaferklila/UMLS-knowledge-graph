@@ -1,0 +1,81 @@
+
+
+SELECT count(*) FROM umls.MRDEF
+466,842
+SELECT count(*) FROM umls.MRDEF where SAB in english
+339341
+
+
+SELECT count(*) FROM umls.MRSTY;
+'3798191'
+
+SELECT count(distinct STY) FROM umls.MRSTY;
+'127'
+
+
+SELECT count(*) FROM umls.MRREL;
+'62908136'
+
+
+
+CREATE TABLE umls.MRDEF_CUI_SAB_DEF AS
+SELECT CUI, SAB, DEF
+FROM umls.MRDEF
+WHERE SAB IN (
+  "AIR", "CST", "DXP", "LCH", "MCM", "ICPC", "QMR", "AOD", "RAM", "MTHMST",
+    "COSTAR", "UWDA", "SPN", "CCS", "HL7V2.5", "CSP", "AOT", "CHV", "LCH_NW", "ICD9CM",
+    "MTHICD9", "PDQ", "FMA", "SOP", "CDCREC", "USPMG", "HGNC", "GO", "ICD10PCS", "NCBI",
+    "NCI", "MEDLINEPLUS", "HL7V3.0", "CCSR_ICD10PCS", "CCSR_ICD10CM", "HPO", "MSH", "OMIM",
+    "MVX", "CVX", "MTHCMSFRF", "DRUGBANK", "USP", "RXNORM", "VANDF", "MTHSPL", "ATC", "LNC",
+    "HCPCS", "MED-RT", "MTH", "SRC", "JABL", "OMS", "CCC", "UMD", "ORPHANET", "MMSL", "WHO",
+    "BI", "CPM", "ULT", "ICD10", "RCD", "PPAC", "RCDAE", "RCDSA", "RCDSY", "ICD10AE",
+    "CCPSS", "ICD10AM", "ICD10AMAE", "DDB", "PCDS", "ICPC2EENG", "MTHICPC2EAE", "PSY",
+    "MTHICPC2ICD10AE", "ICPC2ICD10ENG", "ICPC2P", "ALT", "DSM-5", "NANDA-I", "CDT", "HCDT",
+    "ICNP", "NEU", "NIC", "NOC", "MDR", "CPT", "MEDCIN", "NUCCHCPT", "PNDS", "MMX",
+    "NDDF", "GS", "HCPT", "ICF", "ICF-CY", "ICD10CM", "SNM", "SNMI", "SNOMEDCT_VET", "SNOMEDCT_US"
+);
+
+
+mysql> SELECT COUNT(*) FROM umls.MRDEF_CUI_SAB_DEF;
++----------+
+| COUNT(*) |
++----------+
+|   339341 |
++----------+
+
+  
+  mysql> select count(*) from MRDEF;
++----------+
+| count(*) |
++----------+
+|   466842 |
++----------+
+
+mysql> select count(distinct CUI) from MRDEF_CUI_SAB_DEF;
++---------------------+
+| count(distinct CUI) |
++---------------------+
+|              287972 |
++---------------------+
+
+
+
+SELECT CUI, COUNT(*) AS definition_count
+FROM umls.MRDEF_CUI_SAB_DEF
+WHERE SAB IN ("ICD10","ICD10AM","RCDSY","RCD","SNMI","MDR","SNM","CCS",
+"MTH","ICPC2P",
+"ICD10AMAE","RCDAE","COSTAR","MSH",
+"NCBI","PCDS","CSP","ICD10AE","ICPC","LCH",
+"AIR",
+"RCDSA","AOD","QMR","MMSL","MTHMST","CPT","UWDA","ULT",
+"JABL",
+"CCPSS","CST","DXP","WHO","UMD","SRC","BI","MCM","RAM","PPAC","CPM","SPN","NDDF","MMX",
+"HL7V3.0","RXNORM","HL7V2.5","AOT","NCI","ICD9CM","MTHICD9","SNOMEDCT_US","NIC",
+"ICPC2ICD10ENG","VANDF","MTHSPL","GO","PDQ","OMIM","GS","OMS","ALT",
+"HCPCS","HCDT","HCPT","MEDCIN","FMA","DDB",
+"ICF","ICF-CY","ICD10PCS",
+"ICD10CM","LNC","CHV","PNDS","HGNC","NEU","SOP","MEDLINEPLUS","CDT","ATC","SNOMEDCT_VET",
+"LCH_NW","MTHCMSFRF","USPMG","HPO","MVX","NANDA-I","DSM-5","DRUGBANK","CVX","CCC","MED-RT","NOC","USP","NUCCHCPT","CCSR_ICD10PCS","CCSR_ICD10CM",
+"CDCREC","ICNP","ORPHANET","ICPC2EENG","MTHICPC2EAE","MTHICPC2ICD10AE","PSY")
+GROUP BY CUI
+ORDER BY definition_count DESC;

@@ -1,0 +1,247 @@
+
+mysql> SELECT count(*) FROM umls.MRREL;
++----------+
+| count(*) |
++----------+
+| 62908136 |
++----------+
+1 row in set (5,68 sec)
+
+
+
+
+
+CREATE TABLE umls.MRREL_ENG AS
+SELECT *
+FROM umls.MRREL
+WHERE SAB IN ("ICD10","ICD10AM","RCDSY","RCD","SNMI","MDR","SNM","CCS",
+"MTH","ICPC2P",
+"ICD10AMAE","RCDAE","COSTAR","MSH",
+"NCBI","PCDS","CSP","ICD10AE","ICPC","LCH",
+"AIR",
+"RCDSA","AOD","QMR","MMSL","MTHMST","CPT","UWDA","ULT",
+"JABL",
+"CCPSS","CST","DXP","WHO","UMD","SRC","BI","MCM","RAM","PPAC","CPM","SPN","NDDF","MMX",
+"HL7V3.0","RXNORM","HL7V2.5","AOT","NCI","ICD9CM","MTHICD9","SNOMEDCT_US","NIC",
+"ICPC2ICD10ENG","VANDF","MTHSPL","GO","PDQ","OMIM","GS","OMS","ALT",
+"HCPCS","HCDT","HCPT","MEDCIN","FMA","DDB",
+"ICF","ICF-CY","ICD10PCS",
+"ICD10CM","LNC","CHV","PNDS","HGNC","NEU","SOP","MEDLINEPLUS","CDT","ATC","SNOMEDCT_VET",
+"LCH_NW","MTHCMSFRF","USPMG","HPO","MVX","NANDA-I","DSM-5","DRUGBANK","CVX","CCC","MED-RT","NOC","USP","NUCCHCPT","CCSR_ICD10PCS","CCSR_ICD10CM",
+"CDCREC","ICNP","ORPHANET","ICPC2EENG","MTHICPC2EAE","MTHICPC2ICD10AE","PSY");
+
+
+mysql> SELECT count(*) FROM umls.MRREL_ENG;
++----------+
+| count(*) |
++----------+
+| 38776350 |
++----------+
+1 row in set (1,56 sec)
+
+mysql> SELECT COUNT(DISTINCT CUI) AS total_unique_cui
+    -> FROM (
+    ->     SELECT CUI1 AS CUI FROM umls.MRREL WHERE SAB IN (
+    ->         "ICD10","ICD10AM","RCDSY","RCD","SNMI","MDR","SNM","CCS",
+    ->         "MTH","ICPC2P","ICD10AMAE","RCDAE","COSTAR","MSH",
+    ->         "NCBI","PCDS","CSP","ICD10AE","ICPC","LCH",
+    ->         "AIR","RCDSA","AOD","QMR","MMSL","MTHMST","CPT","UWDA","ULT",
+    ->         "JABL","CCPSS","CST","DXP","WHO","UMD","SRC","BI","MCM","RAM","PPAC","CPM","SPN","NDDF","MMX",
+    ->         "HL7V3.0","RXNORM","HL7V2.5","AOT","NCI","ICD9CM","MTHICD9","SNOMEDCT_US","NIC",
+    ->         "ICPC2ICD10ENG","VANDF","MTHSPL","GO","PDQ","OMIM","GS","OMS","ALT",
+    ->         "HCPCS","HCDT","HCPT","MEDCIN","FMA","DDB",
+    ->         "ICF","ICF-CY","ICD10PCS",
+    ->         "ICD10CM","LNC","CHV","PNDS","HGNC","NEU","SOP","MEDLINEPLUS","CDT","ATC","SNOMEDCT_VET",
+    ->         "LCH_NW","MTHCMSFRF","USPMG","HPO","MVX","NANDA-I","DSM-5","DRUGBANK","CVX","CCC","MED-RT","NOC","USP","NUCCHCPT","CCSR_ICD10PCS","CCSR_ICD10CM",
+    ->         "CDCREC","ICNP","ORPHANET","ICPC2EENG","MTHICPC2EAE","MTHICPC2ICD10AE","PSY"
+    ->     )
+    ->     UNION
+    ->     SELECT CUI2 AS CUI FROM umls.MRREL WHERE SAB IN (
+    ->         "ICD10","ICD10AM","RCDSY","RCD","SNMI","MDR","SNM","CCS",
+    ->         "MTH","ICPC2P","ICD10AMAE","RCDAE","COSTAR","MSH",
+    ->         "NCBI","PCDS","CSP","ICD10AE","ICPC","LCH",
+    ->         "AIR","RCDSA","AOD","QMR","MMSL","MTHMST","CPT","UWDA","ULT",
+    ->         "JABL","CCPSS","CST","DXP","WHO","UMD","SRC","BI","MCM","RAM","PPAC","CPM","SPN","NDDF","MMX",
+    ->         "HL7V3.0","RXNORM","HL7V2.5","AOT","NCI","ICD9CM","MTHICD9","SNOMEDCT_US","NIC",
+    ->         "ICPC2ICD10ENG","VANDF","MTHSPL","GO","PDQ","OMIM","GS","OMS","ALT",
+    ->         "HCPCS","HCDT","HCPT","MEDCIN","FMA","DDB",
+    ->         "ICF","ICF-CY","ICD10PCS",
+    ->         "ICD10CM","LNC","CHV","PNDS","HGNC","NEU","SOP","MEDLINEPLUS","CDT","ATC","SNOMEDCT_VET",
+    ->         "LCH_NW","MTHCMSFRF","USPMG","HPO","MVX","NANDA-I","DSM-5","DRUGBANK","CVX","CCC","MED-RT","NOC","USP","NUCCHCPT","CCSR_ICD10PCS","CCSR_ICD10CM",
+    ->         "CDCREC","ICNP","ORPHANET","ICPC2EENG","MTHICPC2EAE","MTHICPC2ICD10AE","PSY"
+    ->     )
+    -> ) AS all_cuis;
++------------------+
+| total_unique_cui |
++------------------+
+|          3419114 |
++------------------+
+1 row in set (2 min 53,49 sec)
+
+mysql> SELECT COUNT(*) FROM umls.MRREL  WHERE SAB IN (     "ICD10","ICD10AM","RCDSY","RCD","SNMI","MDR","SNM","CCS",     "MTH","ICPC2P","ICD10AMAE","RCDAE","COSTAR","MSH",     "NCBI","PCDS","CSP","ICD10AE","ICPC","LCH",     "AIR","RCDSA","AOD","QMR","MMSL","MTHMST","CPT","UWDA","ULT",     "JABL","CCPSS","CST","DXP","WHO","UMD","SRC","BI","MCM","RAM","PPAC","CPM","SPN","NDDF","MMX",     "HL7V3.0","RXNORM","HL7V2.5","AOT","NCI","ICD9CM","MTHICD9","SNOMEDCT_US","NIC",     "ICPC2ICD10ENG","VANDF","MTHSPL","GO","PDQ","OMIM","GS","OMS","ALT",     "HCPCS","HCDT","HCPT","MEDCIN","FMA","DDB",     "ICF","ICF-CY","ICD10PCS",     "ICD10CM","LNC","CHV","PNDS","HGNC","NEU","SOP","MEDLINEPLUS","CDT","ATC","SNOMEDCT_VET",     "LCH_NW","MTHCMSFRF","USPMG","HPO","MVX","NANDA-I","DSM-5","DRUGBANK","CVX","CCC","MED-RT","NOC","USP","NUCCHCPT","CCSR_ICD10PCS","CCSR_ICD10CM",     "CDCREC","ICNP","ORPHANET","ICPC2EENG","MTHICPC2EAE","MTHICPC2ICD10AE","PSY" ) AND CUI1 !=CUI2;
++----------+
+| COUNT(*) |
++----------+
+| 34224204 |
++----------+
+1 row in set (31,16 sec)
+
+mysql> SELECT COUNT(DISTINCT CUI) AS unique_CUI_count FROM (
+    ->   SELECT CUI1 AS CUI FROM umls.MRREL
+    ->   WHERE SAB IN (
+    ->     "ICD10","ICD10AM","RCDSY","RCD","SNMI","MDR","SNM","CCS",
+    ->     "MTH","ICPC2P","ICD10AMAE","RCDAE","COSTAR","MSH",
+    ->     "NCBI","PCDS","CSP","ICD10AE","ICPC","LCH",
+    ->     "AIR","RCDSA","AOD","QMR","MMSL","MTHMST","CPT","UWDA","ULT",
+    ->     "JABL","CCPSS","CST","DXP","WHO","UMD","SRC","BI","MCM","RAM","PPAC","CPM","SPN","NDDF","MMX",
+    ->     "HL7V3.0","RXNORM","HL7V2.5","AOT","NCI","ICD9CM","MTHICD9","SNOMEDCT_US","NIC",
+    ->     "ICPC2ICD10ENG","VANDF","MTHSPL","GO","PDQ","OMIM","GS","OMS","ALT",
+    ->     "HCPCS","HCDT","HCPT","MEDCIN","FMA","DDB",
+    ->     "ICF","ICF-CY","ICD10PCS",
+    ->     "ICD10CM","LNC","CHV","PNDS","HGNC","NEU","SOP","MEDLINEPLUS","CDT","ATC","SNOMEDCT_VET",
+    ->     "LCH_NW","MTHCMSFRF","USPMG","HPO","MVX","NANDA-I","DSM-5","DRUGBANK","CVX","CCC","MED-RT","NOC","USP","NUCCHCPT","CCSR_ICD10PCS","CCSR_ICD10CM",
+    ->     "CDCREC","ICNP","ORPHANET","ICPC2EENG","MTHICPC2EAE","MTHICPC2ICD10AE","PSY"
+    ->   )
+    ->   AND CUI1 != CUI2
+    ->   
+    ->   UNION
+    ->   
+    ->   SELECT CUI2 AS CUI FROM umls.MRREL
+    ->   WHERE SAB IN (
+    ->     "ICD10","ICD10AM","RCDSY","RCD","SNMI","MDR","SNM","CCS",
+    ->     "MTH","ICPC2P","ICD10AMAE","RCDAE","COSTAR","MSH",
+    ->     "NCBI","PCDS","CSP","ICD10AE","ICPC","LCH",
+    ->     "AIR","RCDSA","AOD","QMR","MMSL","MTHMST","CPT","UWDA","ULT",
+    ->     "JABL","CCPSS","CST","DXP","WHO","UMD","SRC","BI","MCM","RAM","PPAC","CPM","SPN","NDDF","MMX",
+    ->     "HL7V3.0","RXNORM","HL7V2.5","AOT","NCI","ICD9CM","MTHICD9","SNOMEDCT_US","NIC",
+    ->     "ICPC2ICD10ENG","VANDF","MTHSPL","GO","PDQ","OMIM","GS","OMS","ALT",
+    ->     "HCPCS","HCDT","HCPT","MEDCIN","FMA","DDB",
+    ->     "ICF","ICF-CY","ICD10PCS",
+    ->     "ICD10CM","LNC","CHV","PNDS","HGNC","NEU","SOP","MEDLINEPLUS","CDT","ATC","SNOMEDCT_VET",
+    ->     "LCH_NW","MTHCMSFRF","USPMG","HPO","MVX","NANDA-I","DSM-5","DRUGBANK","CVX","CCC","MED-RT","NOC","USP","NUCCHCPT","CCSR_ICD10PCS","CCSR_ICD10CM",
+    ->     "CDCREC","ICNP","ORPHANET","ICPC2EENG","MTHICPC2EAE","MTHICPC2ICD10AE","PSY"
+    ->   )
+    ->   AND CUI1 != CUI2
+    -> ) AS combined_cuis;
++------------------+
+| unique_CUI_count |
++------------------+
+|          3389394 |
++------------------+
+1 row in set (2 min 48,39 sec)
+
+mysql> 
+
+
+IF RELA IS EMPTY ADD THE REL RELATION
+
+mysql> UPDATE umls.MRREL_ENG 
+      SET RELA = REL
+      WHERE RELA IS NULL OR RELA = '';
+Query OK, 8673114 rows affected (4 min 20,80 sec)
+Rows matched: 8673114  Changed: 8673114  Warnings: 0
+
+
+
+mysql> SELECT distinct REL FROM umls.MRREL_ENG;
++-----+
+| REL |
++-----+
+| AQ  |
+| CHD |
+| PAR |
+| QB  |
+| RB  |
+| RL  |
+| RN  |
+| RO  |
+| RQ  |
+| SY  |
++-----+
+10 rows in set (0,01 sec)
+
+
+mysql> SELECT count(*) FROM umls.MRREL_ENG;
++----------+
+| count(*) |
++----------+
+| 38776350 |
++----------+
+1 row in set (26,58 sec)
+
+
+
+mysql> DELETE FROM umls.MRREL_ENG WHERE CUI1 = CUI2;
+Query OK, 4552146 rows affected (1 hour 1 min 37,57 sec)
+
+
+
+mysql> SELECT count(*) FROM umls.MRREL_ENG;
++----------+
+| count(*) |
++----------+
+| 27297920 |
++----------+
+1 row in set (1 min 8,51 sec)
+
+ALTER TABLE umls.MRREL_ENG
+ADD COLUMN relation VARCHAR(50),
+ADD INDEX idx_relation (relation);
+
+UPDATE umls.MRREL_ENG
+SET relation = CASE REL
+  WHEN 'AQ'  THEN 'Allowed_qualifier'
+  WHEN 'CHD' THEN 'has_child_relationship'
+  WHEN 'PAR' THEN 'has_parent_relationship'
+  WHEN 'QB'  THEN 'can_be_qualified_by'
+  WHEN 'RB'  THEN 'has_broader_relationship'
+  WHEN 'RL'  THEN 'similar_or_alike_relationship'
+  WHEN 'RN'  THEN 'has_narrower_relationship'
+  WHEN 'RO'  THEN 'other_non_synonym_relationship'
+  WHEN 'RQ'  THEN 'possibly_synonymous'
+  WHEN 'SY'  THEN 'source_asserted_synonymy'
+  ELSE REL  -- Just in case, keep REL if something else appears
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ADD COLUMN  FOR CUI1 AND CUI2
+mysql> ALTER TABLE umls.MRREL_ENG
+    -> ADD COLUMN CUI1_SemanticTypes TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+    -> ADD COLUMN CUI2_SemanticTypes TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL;
+Query OK, 0 rows affected (0,03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+JOINT WITH SEMANTIC TYPE
+UPDATE umls.MRREL_ENG r
+LEFT JOIN umls.CUI_SEMANTIC_TYPES s1 ON r.CUI1 = s1.CUI
+LEFT JOIN umls.CUI_SEMANTIC_TYPES s2 ON r.CUI2 = s2.CUI
+SET
+  r.CUI1_SemanticTypes = s1.semantic_types,
+  r.CUI2_SemanticTypes = s2.semantic_types;
+
+
+
