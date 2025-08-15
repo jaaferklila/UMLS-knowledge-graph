@@ -5,7 +5,11 @@ This repository contains the complete implementation of a **biomedical knowledge
 It extracts **concepts**, **relationships**, **synonyms**, **semantic types**, and **definitions** from UMLS sources, processes the data, and loads it into a **Neo4j graph database**.
 
 
-
+#📥 Download and Import the Graph
+1. Install gdown (to download from Google Drive):
+```sh
+   pip install gdown
+```
 ---
 
 ## ✨ Features
