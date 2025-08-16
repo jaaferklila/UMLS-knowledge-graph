@@ -40,9 +40,7 @@ unzip graph.zip
 6️⃣ download Neo4j Desktop (Version 1.6.2) 
 
 [Neo4j Desktop](https://neo4j.com/deployment-center/?desktop-gdb)
-<div align="center">
-✨ <strong>Quick Overview of the Graph Construction</strong>
-</div>
+
 7️⃣ Move the dump file (for example graph.dump) into the import folder of your Neo4j installation.
 8️⃣ Load the dump into your database with the following command:
 ```sh
@@ -51,6 +49,9 @@ bin/neo4j-admin database load neo4j --from-path=import --overwrite-destination=t
 ⚠️ Replace neo4j with the name of your database if you’re not using the default one.
 
 👉 After this, you can start your database from Neo4j Desktop and explore your graph 🚀
+<div align="center">
+✨ <strong>Quick Overview of the Graph Construction</strong>
+</div>
 ## ✨ Features
 
 - 📄 **UMLS Metathesaurus parsing** — MRCONSO, MRREL, MRSTY, MRDEF  
