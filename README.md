@@ -226,5 +226,3 @@ The CSV file `MRREL_with_STR_STY_defs_synonyms_clean.csv` contains the following
 CUI1,AUI1,CUI2,AUI2,RUI,relation,STR1,STR2,CUI1_semtypes,CUI2_semtypes,Definitions1,Definitions2,Synonyms1,Synonyms2
 C0000005,A26634265,C0036775,A0115649,R31979041,has_broader_relationship,(131)I-Macroaggregated Albumin,"Serum Albumin, Radio-Iodinated","Amino Acid, Peptide, or Protein || Pharmacologic Substance || Indicator, Reagent, or Diagnostic Aid","Amino Acid, Peptide, or Protein || Indicator, Reagent, or Diagnostic Aid","Definition from MSH: Normal human serum albumin mildly iodinated with radioactive iodine (131-I) which has a half-life of 8 days, and emits beta and gamma rays. It is used as a diagnostic aid in blood volume determination. (from Merck Index, 11th ed)",, "(131)I-MAA","Serum Albumin, Radio Iodinated | Albumin, Radio-Iodinated Serum | Radio-Iodinated Serum Albumin | Serum Albumin, Radioiodinated | Albumin, Radioiodinated Serum | Radioiodinated Serum Albumin | RISA"
 
-# UMLS-knowledge-graph
-# UMLS-knowledge-graph
