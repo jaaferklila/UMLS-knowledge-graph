@@ -50,7 +50,7 @@ bin/neo4j-admin database load neo4j --from-path=import --overwrite-destination=t
 
 👉 After this, you can start your database from Neo4j Desktop and explore your graph 🚀
 <div align="center">
-✨ <strong>Quick Overview of the Graph Construction</strong>
+✨ <h4>Quick Overview of the Graph Construction</h4>
 </div>
 ## ✨ Features
 
