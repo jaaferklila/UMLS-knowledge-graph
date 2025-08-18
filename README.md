@@ -54,7 +54,8 @@ bin/neo4j-admin database load neo4j --from-path=import --overwrite-destination=t
 
 
 Video Tutorial
-[Import UMLS into Neo4j](https://www.youtube.com/watch?v=b9dJXeqX5rE)
+[![Import UMLS into Neo4j](https://img.youtube.com/vi/b9dJXeqX5rE/0.jpg)](https://www.youtube.com/watch?v=b9dJXeqX5rE)
+
 
 
 ![local_infile](images/neo4j.png)
