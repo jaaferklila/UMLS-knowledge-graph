@@ -54,8 +54,9 @@ bin/neo4j-admin database load neo4j --from-path=import --overwrite-destination=t
 
 
 Video Tutorial
-[![Watch the video](images/exemple_graph100nodes.png)](https://raw.githubusercontent.com/jaaferklila/UMLS_knowledge_graph/main/images/import_UMLS_neo4j.mp4)
-
+[[![Watch the video](images/import_UMLS_neo4j.mp4)](https://raw.githubusercontent.com/jaaferklila/UMLS_knowledge_graph/main/images/import_UMLS_neo4j.mp4)
+](https://raw.githubusercontent.com/jaaferklila/UMLS_knowledge_graph/main/images/import_UMLS_neo4j.mp4
+)
 
 
 ![local_infile](images/neo4j.png)
