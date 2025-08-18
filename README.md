@@ -55,7 +55,7 @@ bin/neo4j-admin database load neo4j --from-path=import --overwrite-destination=t
 
 Video Tutorial
 <video width="640" height="360" controls>
-  <source src="import_UMLS_neo4j.mp4" type="video/mp4">
+  <source src="images/import_UMLS_neo4j.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
