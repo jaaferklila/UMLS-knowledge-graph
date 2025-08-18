@@ -51,6 +51,13 @@ bin/neo4j-admin database load neo4j --from-path=import --overwrite-destination=t
 ⚠️ Replace neo4j with the name of your database if you’re not using the default one.
 
 👉 After this, you can start your database from Neo4j Desktop and explore your graph 🚀
+
+Video Tutorial
+<video width="640" height="360" controls>
+  <source src="import_UMLS_neo4j.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ![local_infile](images/neo4j.png)
 ******************************************************************************
 ******************************************************************************
