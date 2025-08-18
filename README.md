@@ -37,6 +37,7 @@ This will download a file called graph.zip into the graph folder.
 ```sh
 unzip graph.zip
 ```
+you will get a file named neo4j.dump(the graph database)
 6️⃣ download Neo4j Desktop (Version 1.6.2) 
 
 [Neo4j Desktop](https://neo4j.com/deployment-center/?desktop-gdb)
